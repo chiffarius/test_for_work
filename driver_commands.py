@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
 
 import time
@@ -40,10 +40,9 @@ def element_visible(driver, elempath):
     wait.until(EC.visibility_of_element_located((By.XPATH, elempath)))
     try:
         wait.until(EC.visibility_of_element_located((By.XPATH, elempath)))
-        return True
-    except NoSuchElementException:
+    except NoSuchElementException or TimeoutException:
         return False
-
+    return True
 
 @allure.step('Type in the field - {2}')
 def uifield_sendkeys(driver, elempath, stringtotype):
@@ -66,7 +65,12 @@ def explicit_wait_for_element_visibility(driver, elempath):
 def element_text(driver, elempath):
     wait = WebDriverWait(driver, 20, 2)
     wait.until(EC.visibility_of_element_located((By.XPATH, elempath)))
-    return driver.find_element_by_xpath(elempath).text
+    for i in range(0, 22):
+        try:
+            text = driver.find_element_by_xpath(elempath).text
+        except StaleElementReferenceException:
+            pass
+    return text
 
 
 @allure.step('Getting attribute value of element')

@@ -12,11 +12,16 @@ context_data["test_data"]["not_real_name"] = "1324"
 context_data["test_data"]["real_name"] = "John"
 context_data["test_data"]["not_real_surname"] = "1324"
 context_data["test_data"]["real_surname"] = "Smith"
+context_data["test_data"]["not_quite_real_name"] = "J123oh453n"
+context_data["test_data"]["not_quite_real_surname"] = "S2134mi124dt5332h"
 
 
 context_data["test_data"]["facebook_url_login"] = "https://www.facebook.com/login"
 # Locators by XPath
 context_data["locator"]["index_header"] = "//div[@id='page_header']"
+
+context_data["locator"]["change_language_to_english"] = "//a[@id='top_switch_lang']"
+context_data["locator"]["login_mobile_header"] = "//div[@class='login_mobile_header']"
 
 context_data["locator"]["index_footer"] = "//div[@id='index_footer_wrap']"
 context_data["locator"][
@@ -75,3 +80,5 @@ context_data["locator"]["index_registration_form_date_error"] = "//div[@class='t
                                                                "/div[@class='wrapped']/div[@class='tt_text']"
 context_data["locator"]["index_registration_form_sex_error"] = "//div[@class='tt_w ij_tt tt_right'][1]" \
                                                                "/div[@class='wrapped']/div[@class='tt_text']"
+
+context_data["locator"]["index_registration_return_to_index_page"] = "//a[@id='top_reg_link']"
